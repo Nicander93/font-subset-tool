@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import {
   buildUnicodeList,
+  COMMON_3500_COUNT,
   getOutputName,
   PREVIEW_SAMPLE,
   type PresetMode,
@@ -52,7 +53,7 @@ function App() {
   const startedAtRef = useRef(0)
 
   const [fontFile, setFontFile] = useState<File | null>(null)
-  const [presetMode, setPresetMode] = useState<PresetMode>('common3000_plus')
+  const [presetMode, setPresetMode] = useState<PresetMode>('common3500_plus')
   const [customChars, setCustomChars] = useState('')
   const [uploadedChars, setUploadedChars] = useState('')
   const [previewText, setPreviewText] = useState(PREVIEW_SAMPLE)
@@ -221,7 +222,7 @@ function App() {
     setFontFile(null)
     setCustomChars('')
     setUploadedChars('')
-    setPresetMode('common3000_plus')
+    setPresetMode('common3500_plus')
     setPreviewText(PREVIEW_SAMPLE)
     setResult(null)
     setError('')
@@ -272,18 +273,18 @@ function App() {
               <label className="radio-item">
                 <input
                   type="radio"
-                  checked={presetMode === 'common3000'}
-                  onChange={() => setPresetMode('common3000')}
+                  checked={presetMode === 'common3500'}
+                  onChange={() => setPresetMode('common3500')}
                 />
-                常用 3000 汉字
+                常用 {COMMON_3500_COUNT} 汉字
               </label>
               <label className="radio-item">
                 <input
                   type="radio"
-                  checked={presetMode === 'common3000_plus'}
-                  onChange={() => setPresetMode('common3000_plus')}
+                  checked={presetMode === 'common3500_plus'}
+                  onChange={() => setPresetMode('common3500_plus')}
                 />
-                3000 + 英数 + 常用标点
+                {COMMON_3500_COUNT} + 英数 + 常用标点
               </label>
             </div>
 

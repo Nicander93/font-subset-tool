@@ -1,8 +1,30 @@
-export type PresetMode = 'common3000' | 'common3000_plus'
+import commonHanTextRaw from '../assets/现代常用汉字.txt?raw'
 
-export const COMMON_3000 = Array.from({ length: 3000 }, (_, index) =>
-  String.fromCodePoint(0x4e00 + index),
-).join('')
+export type PresetMode = 'common3500' | 'common3500_plus'
+
+const PRESET_HANZI_LIMIT = 3500
+const HANZI_REGEX = /\p{Script=Han}/u
+
+const normalizedHanSource = commonHanTextRaw
+  .split(/\r?\n/)
+  .filter((line) => !line.trim().startsWith('//'))
+  .join('')
+
+const extractCommonHanzi = (text: string, limit: number): string => {
+  const result: string[] = []
+  const seen = new Set<string>()
+  for (const char of text) {
+    if (!HANZI_REGEX.test(char)) continue
+    if (seen.has(char)) continue
+    seen.add(char)
+    result.push(char)
+    if (result.length >= limit) break
+  }
+  return result.join('')
+}
+
+export const COMMON_3500 = extractCommonHanzi(normalizedHanSource, PRESET_HANZI_LIMIT)
+export const COMMON_3500_COUNT = Array.from(COMMON_3500).length
 
 export const ASCII_AND_DIGITS =
   '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
@@ -23,8 +45,8 @@ export const buildUnicodeList = ({
   customChars: string
   uploadedChars: string
 }): number[] => {
-  const parts = [COMMON_3000]
-  if (presetMode === 'common3000_plus') {
+  const parts = [COMMON_3500]
+  if (presetMode === 'common3500_plus') {
     parts.push(ASCII_AND_DIGITS, COMMON_PUNCTUATION)
   }
   parts.push(customChars, uploadedChars)

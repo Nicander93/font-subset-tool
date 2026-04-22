@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   buildUnicodeList,
+  COMMON_3500_COUNT,
   getOutputName,
   toUnicodeSet,
 } from '../../src/core/charset'
@@ -16,9 +17,13 @@ describe('charset helpers', () => {
     ])
   })
 
-  it('buildUnicodeList 在 common3000_plus 中包含英数和标点', () => {
+  it('常用字预设为 3500 个', () => {
+    expect(COMMON_3500_COUNT).toBe(3500)
+  })
+
+  it('buildUnicodeList 在 common3500_plus 中包含英数和标点', () => {
     const result = buildUnicodeList({
-      presetMode: 'common3000_plus',
+      presetMode: 'common3500_plus',
       customChars: 'A你',
       uploadedChars: 'B，',
     })
