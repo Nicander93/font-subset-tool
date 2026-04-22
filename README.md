@@ -1,7 +1,7 @@
 # Font Subset Web
 
 一个基于浏览器本地运行的字体子集化工具：上传字体文件，选择字符集，生成更小的 `woff2` 文件并提供接入代码。
-
+🤚在线地址：https://Nicander93.github.io/font-subset-tool/
 ## 你可以做什么
 
 - 支持上传 `ttf/otf` 源字体
@@ -41,8 +41,5 @@
 - 输出格式为 `.woff2`
 - 首版以常见中文网页场景为主
 
-## 发布到 GitHub Pages
 
-访问地址通常为：
 
-`https://<your-username>.github.io/<repo-name>/`
